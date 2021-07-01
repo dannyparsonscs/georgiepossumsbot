@@ -1,0 +1,18 @@
+{
+  "name": "georgiepossums",
+  "version": "1.0.0",
+  "description": "this is a bot that names possums georgies",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jyliet shovels",
+  "license": "ISC",
+  "dependencies": {
+    "dateformat": "^4.5.1",
+    "got": "^11.8.2",
+    "needle": "^2.6.0",
+    "oauth-1.0a": "^2.2.6",
+    "twit": "^2.2.11"
+  }
+}
