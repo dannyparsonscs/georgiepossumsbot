@@ -1,7 +1,12 @@
 const Twit = require("twit");
 const config = require("./config.js");
+const localconfig = require("./localconfig.js");
 
-let twitter = new Twit(config);
+try {
+  let twitter = new Twit(config);
+} catch {
+  let twitter = new Twit(localconfig);
+}
 let georgieTwitterId = "1410387622183194624";
 let possumTwitterId = "1022089486849765376";
 
@@ -232,7 +237,8 @@ function randomPossumFact() {
     "Baby possums will make sneezing sounds or soft “choo choo”s to let mama know where they are, who will respond with clicking noises. Imagine Marvin and Georgie.",
     "Possums don't 'play dead' so much as 'have a weird faint thing they do when terrified.' Georgie is similar.",
     "Sometimes, possums get fleas. Georgie, hopefully, does not. Maybe once.",
-    "FactRetriever says Captain John Smith is responsible for naming the possum... then it goes on to say that the word comes from Powhatan... Let's think about that... Georgie would not be so frivolous in her research.",
+    "FactRetriever says Captain John Smith is responsible for naming the possum... then it goes on to say that the word comes from Powhatan... Let's think about that... Georgie would not be so frivolous in her display of research.",
+    "Captain John Smith came up with the scientific name for possums. Like, okay. Whatever. Georgie doesn't care either.",
     "When possums play dead, they secrete a bad smell and foam at the mouth. If Georgie ever did that, there would be great concern.",
     "Possums can play dead for up to four whole human hours. Georgie might call that 'sleping'.",
     "Girl possums are 'jills' and boy possums are 'jacks' and baby possums are 'joeys'. Georgie is 'Georgie.'",
@@ -244,29 +250,68 @@ function randomPossumFact() {
     "Possums move about 15 miles in a two-week period. That's Georgie running around the gardens.",
     "Possums have 50 teeth, the most of any North American mammal. Georgie has 32 because I bet she didn't get her wisdom teeth yanked out.",
     "Possums weigh between 4 and 12 pounds. Georgie weighs more than that.",
+    "Fact: possums are not pests. Georgie is not either.",
+    "Someone described possums playing dead as 'they can stay zoned out for hours' and y'know what? Georgie.",
+    "As far as we know, no possum is autistic. Georgie is. That's a fact.",
+    "Possums have such a low blood temperature that rabies doesn't like them. Georgie COULD get rabies, but she doesn't because she is a good girl.",
+    "4000 ticks a week?? That's what possums kill. Georgie WISHES.",
+    "Lyme disease? On THOSE possums? Oh no thank you. And Georgie says no thank you either.",
+    "Possums will NOT destroy your property. Georgie probably won't either.",
+    "The animal family that possums are a part of is 70 million years old. Is Astral's soul that old? He might say yes.",
+    "Possums eat carrion. Georgie does not. Let's hope.",
+    "Possums are the only marsupials in North America... except for... no, is Teresa... who knows.",
+    "Possums are smarter than rabbits, dogs, and cats... if we're talking about finding out where food was. Georgie relates.",
+    "Possums and opossums are different. But Georgie is both.",
+    "Playing dead is NOT a choice that possums or Georgie make.",
+    "Possums will remember the smell of poisons for up to a year after they've encountered them. Georgie probably can't tell what Tess keeps in that bottle, though.",
+    "Possums are not immune to the coral snake. Georgie is also not. Possums are immune to other poisons, though, and that would be nice for Georgie, wouldn't it?",
+    "Possums clean themselves like cats do, like with their tongues. Funky. Georgie just takes a bath.",
+    "Sweating is something only Georgies do. Not possums. They can't.",
+    "Possums have all-black eyes... except they don't! Just HUGE pupils. Georgie just has big ol' eyes.",
+    "Jills (girl possums) have two vaginal tracts and two uteruses... and the jacks (boy possums)... have appendages that.... well.... Respect that.......... Georgie doesn't even have ANY so like...",
+    "When European colonizers first encountered possums, they thought that male possums might impregnate females via their nose. Georgie... as no relation to this fact. That's just funny.",
+    "American possums do not have hair on their ears. Georgie would be horrified if she was different.",
+    "Possums can be carriers for a protozoan known as Sarcocystis neurona, which can cause neurological disease.......... in Horses. Possums are dangerous to Horses. Georgie is ALSO dangerous to horses.",
+    "Possums can carry leptospirosis, tuberculosis, coccidiosis, spotted fever, tularemia, and other diseases Georgie can't even pronounce.",
+    "It is illegal to kill both possums and Georgie. For different reasons, but both illegal.",
+    "Possums have gray hair. Georgie does not. Astral does, but he is absolutely not possum-like.",
+    "Opossums can be bright beautiful gold. Georgie would love them.",
+    "Naked tails. Possums have them. Georgie doesn't. That'd be weird.",
+    "Possums are plantigrade. Georgie is, too.",
+    "Possums are 'opportunistic omnivores'. As is Georgie.",
+    "Possums don't have very good vision. In universes where Georgie wears/needs glasses, that is true of her as well.",
+    "New Zealand got oppossums in 1837, to try and set up a fur trade. With no natural predators, they proliferated. Georgie proliferates, too, or something, maybe.",
+    "New Zealand had to make the National Possum Control Agencies in the 1990s to control their possums. Very silly. Simply call them by name (Georgie) and take them to a nice place.",
+    "The common ringtail possum in Australia's scientific name means 'false hand pilgrim'. Georgie's scientific name could also mean that.",
+    "A group of possums is called a passel. A group of Georgies is called a fun time.",
+    "The common bushtail possum in Australia has a scientific name that means 'furry tailed little fox'. Straight to the point. That's something Georgie would come up with.",
+    "One website called Mountain Bushtails 'devastating invaders of roof spaces'. That's Georgie when she goes up to Astral's room uninvited.",
+    "To defend territory, often possums will just stare at each other, ears erect. That'd be Georgie if she met her doppelganger.",
   ];
 
-  if (getRandomIndex(5) === 5) {
-    let possumFact = possumFacts[getRandomIndex(possumFacts.length)];
-    let tweet = {
-      status: `${possumFact}`,
-    };
-    twitter.post("statuses/update", tweet, tweeted);
+  console.log(possumFacts.length);
 
-    function tweeted(err, data, response) {
-      if (err) {
-        console.log("Wuhoh... people missed out on a possum fact!");
-        console.log(err);
-      } else {
-        console.log("Possum fact: tweeted!");
-      }
-    }
-  }
+  //   if (getRandomIndex(5) === 5) {
+  //     let possumFact = possumFacts[getRandomIndex(possumFacts.length)];
+  //     let tweet = {
+  //       status: `${possumFact}`,
+  //     };
+  //     twitter.post("statuses/update", tweet, tweeted);
+
+  //     function tweeted(err, data, response) {
+  //       if (err) {
+  //         console.log("Wuhoh... people missed out on a possum fact!");
+  //         console.log(err);
+  //       } else {
+  //         console.log("Possum fact: tweeted!");
+  //       }
+  //     }
+  //   }
 }
 
 function getRandomIndex(max) {
   return Math.floor(Math.random() * max);
 }
 
-getLatestPossum();
+// getLatestPossum();
 randomPossumFact();
