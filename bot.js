@@ -7,13 +7,15 @@ let possumTwitterId = "1022089486849765376";
 
 function getLatestPossum() {
   let lastGeorgie = {
-    count: 1,
+    count: 2,
     user_id: georgieTwitterId,
   };
 
   let aCoupleOfPossums = {
-    count: 5,
+    count: 1,
     user_id: possumTwitterId,
+    expansions: "attachments.media_keys",
+    media_fields: "url",
   };
 
   let latestGeorgieId = 0;
@@ -23,30 +25,35 @@ function getLatestPossum() {
     lastGeorgie,
     function (err, data, respond) {
       if (data) {
-        latestGeorgieId = data[0].in_reply_to_status_id_str;
+        for (tweet of data) {
+          if (!tweet.is_quote_status) continue;
+          latestGeorgieId = tweet.quoted_status_id_str;
+          break;
+        }
+      } else {
+        console.log(err);
       }
     }
   );
 
   let possumPicPattern = new RegExp("^(https://t.co/[A-Za-z0-9]{10})$");
   twitter.get(
-    "statuses/user_timeline",
+    "statuses/user_timeline/",
     aCoupleOfPossums,
     function (err, data, respond) {
       if (data) {
-        for (tweet of data) {
-          if (tweet.id_str === latestGeorgieId) {
-            console.log("Already named this one Georgie!");
-            break;
+        let tweet = data[0];
+        if (tweet.id_str === latestGeorgieId) {
+          console.log("Already named this one Georgie!");
+        } else {
+          if (!possumPicPattern.test(tweet.text)) {
+            console.log("Alert! Not a possum pic!!!");
           } else {
-            if (!possumPicPattern.test(tweet.text)) {
-              console.log("Alert! Not a possum pic!!!");
-            } else {
-              nameGeorgie(tweet);
-              break;
-            }
+            nameGeorgie(tweet);
           }
         }
+      } else {
+        console.log(err);
       }
     }
   );
@@ -170,9 +177,14 @@ function nameGeorgie(possum) {
     getRandomIndex(100) > 95 ? emoticons[getRandomIndex(emoticons.length)] : "";
   template = template + extra;
 
+  let expandedUrl = possum.extended_entities.media[0].expanded_url;
+  let attachmentUrl = expandedUrl.substring(0, expandedUrl.indexOf("/photo/1"));
+
   let tweet = {
-    in_reply_to_status_id: possum.id_str,
-    status: `@${possum.user.screen_name} ${template}`,
+    attachment_url: attachmentUrl,
+    status: template,
+    tweet_mode: "extended",
+    simple_quoted_tweet: "true",
   };
 
   twitter.post("statuses/update", tweet, tweeted);
@@ -181,7 +193,6 @@ function nameGeorgie(possum) {
     if (err) {
       console.log("Wuhoh... we missed!");
       console.log(err);
-      console.log();
     } else {
       console.log("Another possum named Georgie!");
     }
@@ -215,7 +226,7 @@ function randomPossumFact() {
     "Possums spend their time eating and stuff in the trees and then they waggle down to the ground to sleep... Georgie does similarly.",
     "Pygmy possums can sleep in birds' nests... that must scare those birds... Imagine Georgie, if you will, sleeping in a little bird's nest.",
     "2-4 years is the average lifespan of a possum. :( Georgie can live much longer. Many possums might come and go while Georgie lives.",
-    "In America, birds will eat possums. Not true in Austrlia. Georgie would not eat a possum, regardless of which country she is in.",
+    "In America, birds will eat possums. Not true in Australia. Georgie would not eat a possum, regardless of which country she is in.",
     "There are 70 species of possum. Only 1 Georgie. But all possums are named Georgie... interesting...",
     "The English word 'possum' comes from the Powhatan word 'aposoum,' which means 'white animal.' Georgie could also be said to be a white animal.",
     "Baby possums will make sneezing sounds or soft “choo choo”s to let mama know where they are, who will respond with clicking noises. Imagine Marvin and Georgie.",
