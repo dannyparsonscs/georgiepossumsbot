@@ -1,12 +1,7 @@
 const Twit = require("twit");
 const config = require("./config.js");
-const localconfig = require("./localconfig.js");
 
-try {
-  let twitter = new Twit(config);
-} catch {
-  let twitter = new Twit(localconfig);
-}
+let twitter = new Twit(config);
 let georgieTwitterId = "1410387622183194624";
 let possumTwitterId = "1022089486849765376";
 
@@ -289,29 +284,27 @@ function randomPossumFact() {
     "To defend territory, often possums will just stare at each other, ears erect. That'd be Georgie if she met her doppelganger.",
   ];
 
-  console.log(possumFacts.length);
+  if (getRandomIndex(5) === 5) {
+    let possumFact = possumFacts[getRandomIndex(possumFacts.length)];
+    let tweet = {
+      status: `${possumFact}`,
+    };
+    twitter.post("statuses/update", tweet, tweeted);
 
-  //   if (getRandomIndex(5) === 5) {
-  //     let possumFact = possumFacts[getRandomIndex(possumFacts.length)];
-  //     let tweet = {
-  //       status: `${possumFact}`,
-  //     };
-  //     twitter.post("statuses/update", tweet, tweeted);
-
-  //     function tweeted(err, data, response) {
-  //       if (err) {
-  //         console.log("Wuhoh... people missed out on a possum fact!");
-  //         console.log(err);
-  //       } else {
-  //         console.log("Possum fact: tweeted!");
-  //       }
-  //     }
-  //   }
+    function tweeted(err, data, response) {
+      if (err) {
+        console.log("Wuhoh... people missed out on a possum fact!");
+        console.log(err);
+      } else {
+        console.log("Possum fact: tweeted!");
+      }
+    }
+  }
 }
 
 function getRandomIndex(max) {
   return Math.floor(Math.random() * max);
 }
 
-// getLatestPossum();
+getLatestPossum();
 randomPossumFact();
