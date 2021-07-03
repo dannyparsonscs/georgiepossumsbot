@@ -284,7 +284,7 @@ function randomPossumFact() {
     "To defend territory, often possums will just stare at each other, ears erect. That'd be Georgie if she met her doppelganger.",
   ];
 
-  if (getRandomIndex(5) === 5) {
+  if (getRandomIndex(5) === 4) {
     let possumFact = possumFacts[getRandomIndex(possumFacts.length)];
     let tweet = {
       status: `${possumFact}`,
