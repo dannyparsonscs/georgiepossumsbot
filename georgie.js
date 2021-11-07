@@ -1,9 +1,10 @@
 const Twit = require("twit");
-const config = require("./config.js");
+const config = require("./configs/localconfig.js");
+const twitConfig = require("./configs/localTwitConfig.js");
 
 let twitter = new Twit(config);
-let georgieTwitterId = "1410387622183194624";
-let possumTwitterId = "1022089486849765376";
+let georgieTwitterId = twitConfig.georgieTwitterId;
+let possumTwitterId = twitConfig.possumTwitterId;
 
 function getLatestPossum() {
   let lastGeorgie = {
@@ -47,6 +48,7 @@ function getLatestPossum() {
           console.log("Already named this one Georgie!");
         } else {
           if (!possumPicPattern.test(tweet.text)) {
+            console.log(tweet);
             console.log("Alert! Not a possum pic!!!");
           } else {
             nameGeorgie(tweet);
@@ -146,6 +148,85 @@ function nameGeorgie(possum) {
     "best georgie!!!!!!!!!!!!!",
     "delightful widdle georgie",
     "gosh i sure hope my friends see this incredible georgie!",
+    "100% grade A georgie",
+    "definitely certifiably a georgie!",
+    "the report is in: it's georgie!!",
+    "this possum = this georgie",
+    "you better believe it's georgie!!",
+    "this creature is one of those 'georgies'",
+    "get a little extra georgie",
+    "you want more georgie? bam",
+    "oh darling georgie",
+    "georgie the sweetheart",
+    "georgie the stupendous",
+    "georgie the wise",
+    "georgie the beautiful",
+    "the legends are true: it's georgie!!",
+    "what a cute face this georgie has!",
+    "eat your heart out, it's georgie!!",
+    "this georgie knows how to have a good time",
+    "don't think twice! it's georgie",
+    "here's a riddle for you: what is this creature's name?\n\nduh, it's georgie!",
+    "did you miss her? it's georgie",
+    "yes, this is one of those georgies you've heard so much about",
+    "this is a georgie you can take home to mama!",
+    "rotate this georgie in your mind",
+    "georgie is such a good girl",
+    "georgie is an angel",
+    "this georgie is one of god's gifts",
+    "here's a georgie",
+    "there's a georgie",
+    "georgie's back at it again!",
+    "here's a georgie for the road",
+    "have a good day thinking about this georgie",
+    "thank you, sweet georgie, one of many",
+    "cute widdle georgie",
+    "get a load of this georgie!",
+    "georgie porgie possum and pie",
+    "a kiss from this georgie to you",
+    "have a good day with this georgie",
+    "watch out! it's georgie",
+    "clear the way! it's georgie",
+    "what a heart throb this georgie is!",
+    "you want her, you got her..... it's georgie",
+    "it's georgie, baby!",
+    "wake up! georgie's here",
+    "georgie has arrived",
+    "georgie has entered the chat",
+    "georgies are always the life of the party",
+    "live it up, georgie",
+    "every hour, there's another georgie for the world. this hour, it's this one",
+    "best georgie of the day",
+    "#1 georgie and #2 #3 #4... ",
+    "georgie, etc.",
+    "georgie is typing",
+    "georgie alert!",
+    "attention everyone: look at georgie",
+    "@ everyone look at this possum named georgie",
+    "shoutout for this georgie!",
+    "well, if it isn't another georgie",
+    "happy day! georgie is here",
+    "i am in love with this georgie",
+    "i wish i could marry this georgie",
+    "-kisses this georgie-",
+    "lol guys it's georgie",
+    "georgie!",
+    "georgie time",
+    "real georgie hours",
+    "possum (georgie)",
+    "Didelphimorphia Georgie",
+    "wooohooo!! this is georgie",
+    "celebrate this georgie",
+    "you got this, georgie!!",
+    "this is one of the best georgies",
+    "this georgie is a good one",
+    "this georgie is fun at parties",
+    "georgie-creature",
+    "o-georgie",
+    "model georgie",
+    "little creature... georgie....",
+    "a kiss for this georgie: mwah!",
+    "the world belongs to georgie",
   ];
 
   let emoticons = [
@@ -169,20 +250,99 @@ function nameGeorgie(possum) {
     " :))))",
     " :-))))",
     " :)c",
+    "!!!!!!",
+    " :33",
+    " :33 !!",
+    " asfjdklds",
+    " gjlafdk",
+    " :DD",
+    " :V (possum face)",
+    " :V :V",
+    " ;w;",
+    " :}",
+    " 8)",
+    " B)",
+    " B-)",
+    " 8-)",
+    " owo",
+    " uwu",
+    " ◄:•D",
+    " <3",
+    " <3<3",
+    " 😀",
+    " 😁",
+    " 😂",
+    " 😃",
+    " 😄",
+    " 😇",
+    " 😉",
+    " 😊",
+    " 🙂",
+    " ☺️",
+    " 😋",
+    " 😍",
+    " 😘",
+    " 😗",
+    " 😙",
+    " 😚",
+    " 😜",
+    " 🤗",
+    " 😮",
+    " 😲",
+    " 🤣",
+    " 🤩",
+    " 😺",
+    " 😸",
+    " 😹",
+    " 😻",
+    " 😽",
+    " 🌺",
+    " 🌻",
+    " 🌹",
+    " 🌷",
+    " 🌼",
+    " 🌸",
+    " 💐",
+    " 🎊",
+    " 🎉",
+    " ❗",
+    " 💯",
+    " 🔅",
+    " 🔆",
+    " 🆒",
+    " 🎈",
+  ];
+
+  let kaomoji = [
+    " (●´□`)♡",
+    " ღゝ◡╹)ノ♡",
+    " (◍•ڡ•◍)❤",
+    " -ω(´•ω•｀)♡",
+    " ❣╰(⸝⸝⸝´꒳`⸝⸝⸝)╯❣",
+    " ヽ(o♡o)/",
+    " (人 •͈ᴗ•͈)",
+    " сμтёღ♡(˘ᵋ ˘ )",
+    " ( ◔ ౪◔)⊃━☆ﾟ.*・",
+    " ◌⑅⃝●♡⋆♡⃝ ˻˳˯ₑ♡⃝⋆●♡⑅⃝◌",
   ];
 
   let templateIndex = getRandomIndex(nameTemplates.length);
   let template = nameTemplates[templateIndex];
+  let luckScore = getRandomIndex(100);
   let extra =
-    getRandomIndex(100) > 95 ? emoticons[getRandomIndex(emoticons.length)] : "";
-  template = template + extra;
+    luckScore > 95
+      ? kaomoji[getRandomIndex(kaomoji.length)]
+      : luckScore > 80
+      ? emoticons[getRandomIndex(emoticons.length)]
+      : "";
+  let tweetBody = template + extra;
 
   let expandedUrl = possum.extended_entities.media[0].expanded_url;
   let attachmentUrl = expandedUrl.substring(0, expandedUrl.indexOf("/photo/1"));
 
   let tweet = {
     attachment_url: attachmentUrl,
-    status: template,
+    status: tweetBody,
     tweet_mode: "extended",
     simple_quoted_tweet: "true",
   };
@@ -282,6 +442,29 @@ function randomPossumFact() {
     "The common bushtail possum in Australia has a scientific name that means 'furry tailed little fox'. Straight to the point. That's something Georgie would come up with.",
     "One website called Mountain Bushtails 'devastating invaders of roof spaces'. That's Georgie when she goes up to Astral's room uninvited.",
     "To defend territory, often possums will just stare at each other, ears erect. That'd be Georgie if she met her doppelganger.",
+    "Possums (Virginia) come from the Two Womb animal family. Georgies love wombs.",
+    "William Strachey (some guy) said possums have 'the bigness of a pig.' LOL what kinda pigs is that guy looking at? Georgies have the bigness of a cat.",
+    "People call possums 'living fossils' sometimes. Weird! Georgie's a living.",
+    "The dental formula is: 5.1.3.4/4.1.3.4 × 2 = 50 teeth. Don't you forget it. That's a lot of teeth and math, and Georgie's not gonna look at it anymore.",
+    "Males make a clicking 'smack' noise out of the side of their mouths as they wander in search of a mate. Or I guess just like stimming. Georgies do a lot of stimming.",
+    "Possums need a TON of calcium and they get it from eating bones. Yeah, you read that right. Georgie could make some good bone marrow soup.",
+    "Possum grease is high in essential fatty acids. Delicious grease. Rub it on your chest. Georgie will not help.",
+    "The opossum is typically a nonaggressive animal. Georgie can make no such promises.",
+    "The common opossum can mate for the majority of the calendar year. Interpret that as you will. Georgies can mate, too.",
+    "Possums don't mate for life. Georgie does, though.",
+    "Possums can give birth to up to 24 babies. 24 hours in a day... it's fate. Georgie time 24x a day.",
+    "The back foot of a possum has an opposable little thumb. Georgie's got like. At least two opposable thumbs.",
+    "No other mammal in North America has more than 6 upper incisors, but the Virginia opossum has 10. Georgie's got all of 'em.",
+    "Possums walk like left side, right side, left side, right side... Step step step, like Georgie stepping into your heart.",
+    "Heidi was a cross-eyed possum living in a German zoo. Or, so they thought. The possum's real name? Georgie. And she had cross eyeds.",
+    "Cross-eyed-ness is common for possums if they get fat when the fat literally pushes on their eyes. Amazing. They function fine. Georgie is not cross-eyed at the moment.",
+    "FDR and the teddy bear? Step aside! Some folks tried to make a popular possum character ('Billy') with Howard Taft. It didn't go well. They should've named him Georgie.",
+    "On the Perelman Building, the possum represents 'protection.' Georgie will attack... but she will always protect.",
+    "Being talked to or pet can be distressing for wild possums. Just like a Georgie.",
+    "Possum pie is a lil dessert. No meat. Why would you think there was meat in it? No meat, no Georgie meat... just... sweet confection.",
+    "Possums is a 1998 sports comedy film directed by Max Burnett. Kinda confusing to watch... everyone's named Georgie. But Georgie? Never. Sports? Feh.",
+    "Top speed of a possum is 15mph. Georgie can definitely run at least that fast. Will she? Depends.",
+    "Hibernation is not on the calendar for any possum out there. Possums, and Georgie, are an all year event.",
   ];
 
   if (getRandomIndex(5) === 4) {
