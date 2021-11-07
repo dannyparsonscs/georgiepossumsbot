@@ -21,6 +21,37 @@ function getLatestPossum() {
 
   let latestGeorgieId = 0;
 
+  let possumPicPattern = new RegExp("^(https://t.co/[A-Za-z0-9]{10})$");
+  function getPossumHourTweets(latestGeorgieId) {
+    twitter.get(
+      "statuses/user_timeline/",
+      aCoupleOfPossums,
+      function (err, data, respond) {
+        if (data) {
+          let tweet = data[0];
+          console.log(
+            "id string: " +
+              tweet.id_str +
+              "\ngeorgie string: " +
+              latestGeorgieId
+          );
+          if (tweet.id_str === latestGeorgieId) {
+            console.log("Already named this one Georgie!");
+          } else {
+            if (!possumPicPattern.test(tweet.text)) {
+              console.log(tweet);
+              console.log("Alert! Not a possum pic!!!");
+            } else {
+              nameGeorgie(tweet);
+            }
+          }
+        } else {
+          console.log(err);
+        }
+      }
+    );
+  }
+
   twitter.get(
     "statuses/user_timeline",
     lastGeorgie,
@@ -28,31 +59,8 @@ function getLatestPossum() {
       if (data) {
         for (tweet of data) {
           if (!tweet.is_quote_status) continue;
-          latestGeorgieId = tweet.quoted_status_id_str;
+          getPossumHourTweets(tweet.quoted_status_id_str);
           break;
-        }
-      } else {
-        console.log(err);
-      }
-    }
-  );
-
-  let possumPicPattern = new RegExp("^(https://t.co/[A-Za-z0-9]{10})$");
-  twitter.get(
-    "statuses/user_timeline/",
-    aCoupleOfPossums,
-    function (err, data, respond) {
-      if (data) {
-        let tweet = data[0];
-        if (tweet.id_str === latestGeorgieId) {
-          console.log("Already named this one Georgie!");
-        } else {
-          if (!possumPicPattern.test(tweet.text)) {
-            console.log(tweet);
-            console.log("Alert! Not a possum pic!!!");
-          } else {
-            nameGeorgie(tweet);
-          }
         }
       } else {
         console.log(err);
