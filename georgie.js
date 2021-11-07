@@ -1,6 +1,6 @@
 const Twit = require("twit");
-const config = require("./configs/localconfig.js");
-const twitConfig = require("./configs/localTwitConfig.js");
+const config = require("./configs/config.js");
+const twitConfig = require("./configs/twitConfig.js");
 
 let twitter = new Twit(config);
 let georgieTwitterId = twitConfig.georgieTwitterId;
