@@ -29,12 +29,6 @@ function getLatestPossum() {
       function (err, data, respond) {
         if (data) {
           let tweet = data[0];
-          console.log(
-            "id string: " +
-              tweet.id_str +
-              "\ngeorgie string: " +
-              latestGeorgieId
-          );
           if (tweet.id_str === latestGeorgieId) {
             console.log("Already named this one Georgie!");
           } else {
@@ -42,6 +36,7 @@ function getLatestPossum() {
               console.log(tweet);
               console.log("Alert! Not a possum pic!!!");
             } else {
+              console.log("Let's name this Georgie!");
               nameGeorgie(tweet);
             }
           }
